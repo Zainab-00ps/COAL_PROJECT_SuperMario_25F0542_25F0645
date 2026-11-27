@@ -4,46 +4,41 @@ A 16-bit side-scrolling platform game written in x86 assembly (NASM, 8086 real m
 Everything is built by us: VGA mode 13h drawing, own keyboard and timer interrupt handlers, fixed-point physics,
 enemies, blocks, score and HUD. No libraries, no engine, no code from other sources.
 
-## 1. Team
+1. Team
+Name	Roll number	Modules developed
+Student 1 name	25F-0542	1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+Student 2 name	25F-0645	11, 12, 13, 14, 15
 
-| Name         | Roll number | Modules developed |
+Section: BCS (3rd semester) | Lab instructor: name of instructor
 
-| Zainab Aslam | 25F-0542    | 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 |
-| Javeria Abid | 25F-0645    | 11, 13, 14, 15 |
-
-Section: BCS 3F(3rd semester) | Lab instructor: Sir Shahzad tanver
-
-### Which part of `src/mario.asm` belongs to which module
-
-| Module                       | Owner         | Procedures (and data) |
-
-| 1 Skeleton and build         | Zainab Aslam  | constants (EQU), data layout, `start`, `mainloop`, `quit`, `InitData`, `ConvertBlock` |
-| 2 Video mode and colours     | Zainab Aslam  | `InitVideo`, `RestoreText`, `PutPixel`, `FillRect`, `DrawRects` |
-| 3 Level map and tiles        | Zainab Aslam  | `TileIndex`, `GetTile`, `Solid`, `DrawTile`, `DrawMap`, `ResetMap`, `origmap`, `workmap`, tile tables |
-| 4 Sprites                    | Zainab Aslam  | `DrawSprite`, all `spr_...` art |
-| 5 Frame buffer               | Zainab Aslam  | `ClearBuffer`, `FlipBuffer` |
-| 6 Camera and scrolling       |Zainab Aslam   | `UpdateCamera` |
-| 7 Keyboard interrupt         |Zainab Aslam   | `kbisr`, `HookKeyboard`, `UnhookKeyboard`, key table |
-| 8 Timer and clock            |Zainab Aslam   | `timerisr`, `HookTimer`, `UnhookTimer`, `WaitTick`, `UpdateClock` |
-| 9 Movement and physics       |Zainab Aslam   | `UpdateMario` (8.8 fixed point) |
-| 10 Collision detection       | Zainab Aslam  | `CheckSide`, `CheckHoriz`, `MoveMarioX`, `MoveMarioY`, `RectOverlap`, `CheckEntity` |
-| 11 Enemies and shells        | Javeria Abid  | `EntWalk`, `EntFall`, `HitOther`, `UpdateEnemy`, `UpdateEnemies`, `DrawEnemies`, `CheckEnemies`, `ChainScore`, enemy table |
-| 12 Blocks, coins, power-ups  | Javeria Abid  | `HitBlock`, `UpdateMushroom`, `MakeSuper`, `CollectCoins`, `TouchRow`, `TouchPoint` |
-| 13 Score, health, lives, HUD | Javeria Abid  | `AddScore`, `AddCoin`, `AddLife`, `HurtMario`, `PrintStr`, `PrintTable`, `PrintNumber`, `DrawHUD`, `DrawHUDText` |
-| 14 States, screens, menus    | Javeria Abid  | `StateTitle`, `StatePlaying`, `StatePaused`, `StateLifeLost`, `StateComplete`, `StateGameOver`, `DrawWorld`, `DrawMario`, text tables |
-| 15 Win, lose, restart, exit  | Javeria Abid  | `KillMario`, `StateDying`, `StateWin`, `StartWin`, `ResetLevel`, `NewGame` |
+Which part of src/mario.asm belongs to which module
+Module	Owner	Procedures (and data)
+1 Skeleton and build	Zainab	constants (EQU), data layout, start, mainloop, quit, InitData, ConvertBlock
+2 Video mode and colours	Zainab	InitVideo, RestoreText, PutPixel, FillRect, DrawRects
+3 Level map and tiles	Zainab	TileIndex, GetTile, Solid, DrawTile, DrawMap, ResetMap, origmap, workmap, tile tables
+4 Sprites	Zainab	DrawSprite, all spr_... art
+5 Frame buffer	Zainab	ClearBuffer, FlipBuffer
+6 Camera and scrolling	Zainab	UpdateCamera
+7 Keyboard interrupt	Zainab	kbisr, HookKeyboard, UnhookKeyboard, key table
+8 Timer and clock	Student 1	timerisr, HookTimer, UnhookTimer, WaitTick, UpdateClock
+9 Movement and physics	Zainab	UpdateMario (8.8 fixed point)
+10 Collision detection	Zainab	CheckSide, CheckHoriz, MoveMarioX, MoveMarioY, RectOverlap, CheckEntity
+11 Enemies and shells	Javeria	EntWalk, EntFall, HitOther, UpdateEnemy, UpdateEnemies, DrawEnemies, CheckEnemies, ChainScore, enemy table
+12 Blocks, coins, power-ups	Javeria	HitBlock, UpdateMushroom, MakeSuper, CollectCoins, TouchRow, TouchPoint
+13 Score, health, lives, HUD	Javeria	AddScore, AddCoin, AddLife, HurtMario, PrintStr, PrintTable, PrintNumber, DrawHUD, DrawHUDText
+14 States, screens, menus	Javeria	StateTitle, StatePlaying, StatePaused, StateLifeLost, StateComplete, StateGameOver, DrawWorld, DrawMario, text tables
+15 Win, lose, restart, exit	Javeria	KillMario, StateDying, StateWin, StartWin, ResetLevel, NewGame
 
 
-## 3. Controls
-
-| Key                | Action |
-| Left / Right arrow | Move left / right |
-| Left Shift         | Run |
-| Space              | Jump (hold for a higher jump, no double jump) |
-| P                  | Pause / resume |
-| Up / Down arrow    | Move the menu highlight |
-| Enter              | Select in menus, continue on end screens |
-| Esc                | Back to title (from game) / exit (from title) |
+3. Controls
+Key	Action
+Left / Right arrow	Move left / right
+Left Shift	Run
+Space	Jump (hold for a higher jump, no double jump)
+P	Pause / resume
+Up / Down arrow	Move the menu highlight
+Enter	Select in menus, continue on end screens
+Esc	Back to title (from game) / exit (from title)
 
 
 ## 4. Game states (in words)
